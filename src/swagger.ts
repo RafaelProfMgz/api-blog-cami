@@ -5,9 +5,9 @@ export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
     .setTitle('blog cami API')
     .setDescription('The blog cami API description')
-    .setVersion('1.0') 
+    .setVersion('1.0')
     .addTag('blogcami')
-    .addBearerAuth() 
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

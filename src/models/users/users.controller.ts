@@ -17,7 +17,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { GetOneUserDto } from './dto/get-one-user.dto';
 import { DeleteUserDto } from './dto/delete-user.dto';
 import { ApiBody, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { PaginationDto } from './dto/pagination.dto';
+import { PaginationDto } from 'src/utils/dto/pagination';
 
 @ApiTags('Users')
 @Controller('users')
@@ -31,7 +31,7 @@ export class UsersController {
   })
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    return this.usersService.createUser(createUserDto);
   }
 
   @ApiBody({
@@ -40,12 +40,12 @@ export class UsersController {
   })
   @ApiQuery({
     name: 'page',
-  }) 
+  })
   @Get()
   async findAll(@Query() paginationDto: PaginationDto) {
     const { page, limit, skip, sort } = paginationDto;
 
-    return this.usersService.findAll({
+    return this.usersService.findAllUser({
       skip,
       take: limit,
       sort,
@@ -63,7 +63,7 @@ export class UsersController {
   })
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findOne(id);
+    return this.usersService.findOneUser(id);
   }
 
   @ApiBody({
@@ -80,7 +80,7 @@ export class UsersController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.usersService.update(id, updateUserDto);
+    return this.usersService.updateUser(id, updateUserDto);
   }
 
   @ApiBody({
@@ -94,6 +94,6 @@ export class UsersController {
   })
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.remove(id);
+    return this.usersService.removeUser(id);
   }
 }

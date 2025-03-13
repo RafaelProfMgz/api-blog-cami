@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Check if the app is running in production mode
-  const isProduction = process.env.NODE_ENV === 'production';
+  const isProduction = process.env.NODE_ENV === 'production' || false;
 
   // Use validation pipe to automatically transform incoming request data to DTO instances
   app.useGlobalPipes(
@@ -21,8 +21,9 @@ async function bootstrap() {
   );
 
   // Set up Swagger only in non-production environments (optional)
-  if (!isProduction) {
+  if (isProduction) {
     setupSwagger(app);
+    console.log(isProduction);
   }
 
   // Set up CORS to allow requests from all origins
