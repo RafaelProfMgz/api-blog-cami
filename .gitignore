@@ -1,3 +1,7 @@
+// Purpose: Ignore files and directories in git
+// Documentation: https://git-scm.com/docs/gitignore
+.vscode
+
 # compiled output
 /dist
 /node_modules
